@@ -1,6 +1,9 @@
 library(numbers)
-library(memoise)
+# library(memoise)
 library(useful)
+
+# The memoised version is SLOWER
+# mem_pf <- memoise(primeFactors)
 
 # Return myu function in "Merten's Conjecture"
 # (https://www.youtube.com/watch?v=uvMGZb0Suyc)
@@ -13,10 +16,11 @@ myu <- function(n) {
          ifelse(sapply(upf, length) %% 2 == 0, 1, -1),
          0)
 }
-mem_myu <- memoise(myu)
+# mem_myu <- memoise(myu)
 
 # Return sum of myu values in range 1..n
-msum <- function(n) sum(mem_myu(seq(n)))
+msum <- function(n) sum(myu(seq(n)))
+
 xmax <- 2000
 x <- seq(xmax)
 y <- sapply(x, msum)
